@@ -1,0 +1,8 @@
+[package]
+name = "cherry_app"
+version = "0.1.0"
+authors = [" <>"]
+
+[dependencies]
+rocket = "0.3.2"
+rocket_codegen = "0.3.2"
