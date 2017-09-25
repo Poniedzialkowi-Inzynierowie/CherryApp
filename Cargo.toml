@@ -1,8 +1,19 @@
 [package]
 name = "cherry_app"
-version = "0.1.0"
-authors = [" <>"]
+version = "0.0.6"
+authors = [
+	"Kacper Skrzynski <adamn.zxc@gmial.com>",
+	" <>",
+	" <>",
+	" <>",
+	" <>"
+]
+build = "build.rs"
 
 [dependencies]
-rocket = "0.3.2"
-rocket_codegen = "0.3.2"
+rocket = "*"
+rocket_codegen = "*"
+
+[build-dependencies]
+inotify = "0.4.2"
+rsass = "0.3.4"

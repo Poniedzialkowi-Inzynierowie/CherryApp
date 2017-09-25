@@ -1,0 +1,27 @@
+[
+	{"title": "lesson",	"start": "08:00",	"end": "08:45"},
+	{"title":"pause",	"start": "08:45",	"end": "08:50"},
+
+	{"title": "lesson",	"start": "08:50",	"end": "09:35"},
+	{"title":"pause",	"start": "09:35",	"end": "09:40"},
+
+	{"title": "lesson",	"start": "09:40",	"end": "10:25"},
+	{"title":"pause",	"start": "10:25",	"end": "10:35"},
+
+	{"title": "lesson",	"start": "10:35",	"end": "11:20"},
+	{"title":"pause",	"start": "11:20",	"end": "11:40"},
+
+	{"title": "lesson",	"start": "11:40",	"end": "12:25"},
+	{"title":"pause",	"start": "12:25",	"end": "12:35"},
+
+	{"title": "lesson",	"start": "12:35",	"end": "13:20"},
+	{"title":"pause",	"start": "13:20",	"end": "13:25"},
+
+	{"title": "lesson",	"start": "13:25",	"end": "14:10"},
+	{"title":"pause",	"start": "14:10",	"end": "14:15"},
+
+	{"title": "lesson",	"start": "14:15",	"end": "15:00"},
+	{"title":"pause",	"start": "15:00",	"end": "15:05"},
+
+	{"title": "lesson",	"start": "15:05",	"end": "15:50"},
+]
