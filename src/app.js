@@ -30,7 +30,7 @@
 				Number(i['end'].split(':')[0])
 			)}
 			for j in r{ var s += r - currentTime }
-			
+
 		}
 		this.nextTimeSpan = function() {}
 
@@ -53,4 +53,3 @@
 	});
 
 })(jQuery);
-
