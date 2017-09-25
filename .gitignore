@@ -56,3 +56,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# lazy conversion html to pug directory
+src/html

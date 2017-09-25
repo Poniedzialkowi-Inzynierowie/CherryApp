@@ -14,6 +14,7 @@ var paths = {
 	scripts:	['src/static/jQuery.js', 'src/scripts/*.js', 'src/app.js'],
 	images:		'src/static/images/*',
 	templates:	'src/static/templates/*.jade',
+	html:		'src/html/*.html'
 };
 
 // ------------------------------------------------------------------------- //
@@ -68,7 +69,7 @@ gulp.task('templates', ['clean_templates'], function() {
 gulp.task('html2pug', function() {
 // For lazyness; it will convert your stupid html
 	return gulp.src(paths.html)
-	.pipe(html2pug({tabs}))
+	.pipe(html2pug({nspaces:4,tabs:true}))
 	.pipe(gulp.dest('src/html/parsed'));
 });
 
