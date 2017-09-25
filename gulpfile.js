@@ -77,10 +77,10 @@ gulp.task('html2pug', function() {
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
-  gulp.watch(	paths.styles,		['styles']		);
-  gulp.watch(	paths.scripts,		['scripts']		);
-  gulp.watch(	paths.images,		['images']		);
-  gulp.watch(	paths.templates,	['templates']	);
+	gulp.watch(	paths.styles,		['styles']		);
+	gulp.watch(	paths.scripts,		['scripts']		);
+	gulp.watch(	paths.images,		['images']		);
+	gulp.watch(	paths.templates,	['templates']	);
 });
 
 // ------------------------------------------------------------------------- //
@@ -94,4 +94,7 @@ gulp.task('build', ['styles', 'scripts', 'images', 'templates']);
 
 // The `clean` task removes files from end folder;
 // (called when you run `gulp clean` from cli)
-gulp.task('clean',[ 'clean_styles','clean_scripts', 'clean_images', 'clean_templates']);
+gulp.task('clean', [
+		'clean_styles', 'clean_scripts',
+		'clean_images', 'clean_templates'
+]);
