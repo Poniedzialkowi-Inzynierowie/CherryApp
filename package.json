@@ -2,7 +2,7 @@
   "name": "cherryapp",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,15 +10,23 @@
     "type": "git",
     "url": "git+https://github.com/Nobody-Special/CherryApp.git"
   },
-  "author": ["Kacper Skrzynski <adamn.zxc@gmail.com>", "", "", ""],
+  "author": [
+    "Kacper Skrzynski <adamn.zxc@gmail.com>",
+    "",
+    "",
+    ""
+  ],
   "license": "GPLv3",
   "bugs": {
     "url": "https://github.com/Nobody-Special/CherryApp/issues"
   },
   "homepage": "https://github.com/Nobody-Special/CherryApp#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "del": "^3.0.0",
     "express": "^4.15.5",
+    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-concat": "^2.6.1",
