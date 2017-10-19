@@ -10,7 +10,7 @@ var del = require('del');
 // ------------------------------------------------------------------------- //
 
 var paths = {
-	json:			'src/static/json'
+	json:			'src/static/json',
 	templates:		'src/static/templates/*.pug',
 	scripts:		['src/static/app.js', 'src/static/scripts/*.js'],
 	styles:			'src/static/main.sass',

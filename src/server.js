@@ -1,6 +1,8 @@
 const fs = require('fs');
+const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 const port = process.env.PORT || 8080;
 
@@ -10,12 +12,11 @@ app.use(cookieParser());
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-
-getFile(path) -> {
+function getFile(path) {
 	fs.readFile('static/app.min.js', 'utf8', (err, data) => {
-		if (err) { console.log("Can't read file due to: "+ err)}
+		if (err) { console.log("Can't read file due to: "+ err) }
 		else{ return data }
-	}
+	});
 }
 
 
@@ -42,6 +43,9 @@ app.route('/static')
 })
 
 // ----------------------------------------------------------------------------
-app.listen(port, () => {
-	console.log('Server started! At http://localhost:' + port)
-});
+http.createServer(app).listen(80);
+
+app.listen = function() {
+  var server = http.createServer(this);
+  return server.listen.apply(server, arguments);
+};
