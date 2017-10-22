@@ -13,7 +13,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 function getFile(path) {
-	fs.readFile('static/app.min.js', 'utf8', (err, data) => {
+	fs.readFile(path, 'utf8', (err, data) => {
 		if (err) { console.log("Can't read file due to: "+ err) }
 		else{ return data }
 	});
@@ -22,7 +22,7 @@ function getFile(path) {
 
 // ----------------------------------------------------------------------------
 // As project is using REST api philosophy, we do not need
-// any dynamic acces to static files and so we provide staticly
+// any dynamic access to static files and so we provide statically
 // typed routes to main.min.css and app.min.js
 
 app.route('/static')
@@ -37,7 +37,7 @@ app.route('/static')
 		default:
 			console.log(
 				"Warning: Requested static", req.param("file"), "file",
-				"wich doesn't exist, or is not served by server"
+				"wchich doesn't exist, or is not served by server"
 			)
 	}
 })
