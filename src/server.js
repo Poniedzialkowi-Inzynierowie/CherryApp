@@ -35,10 +35,7 @@ app.route('/static')
 			res.send( getFile('static/main.min.css') );
 			break;
 		default:
-			console.log(
-				"Warning: Requested static", req.param("file"), "file",
-				"wchich doesn't exist, or is not served by server"
-			)
+			console.log(`Warning: Requested static file "${req.param('file')}" which doesn't exist, or is not served by the server`);
 	}
 })
 
