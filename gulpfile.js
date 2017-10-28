@@ -27,9 +27,7 @@ const dest = {
 	icons: 'build/assets/icons',
 }
 
-gulp.task('clean_scripts', function(){
-	return del('build/static/app.js');
-});
+gulp.task('clean_scripts', () =>del(`${dest.scripts}/bundle.js`));
 
 gulp.task('clean_styles', () => del(`${dest.styles}/style.css`));
 
