@@ -35,8 +35,8 @@ gulp.task('clean_styles', () => del(`${dest.styles}/style.css`));
 
 gulp.task('clean_images', () => del(dest.images));
 
-gulp.task('server', function(){
-	exec('node src/server.js', function (err, stdout, stderr) {
+gulp.task('server', () => {
+	exec(`node ${src.serverEntry}`, (err, stdout, stderr) => {
 		console.log(stdout);
 		console.log(stderr);
 	});
