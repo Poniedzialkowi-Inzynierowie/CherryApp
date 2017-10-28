@@ -50,15 +50,16 @@ gulp.task('scripts', ['clean_scripts'], function() {
 	.pipe(gulp.dest('build/static'));
 });
 
-gulp.task('styles', ['clean_styles'], function(){
-	return gulp.src(paths.styles)
-	.pipe(sass({outputStyle: 'compressed'})
-		.on('error', sass.logError))
-	.pipe(autoprefixer({
-		browsers: ['last 4 versions'],
-		cascade: true
-	}))
-	.pipe(gulp.dest('build/static'));
+gulp.task('styles', ['clean_styles'], () => {
+	return gulp.src(src.styles)
+		.pipe(sass({outputStyle: 'compressed'})
+			.on('error', sass.logError))
+		.pipe(autoprefixer({
+			browsers: ['last 4 versions'],
+			cascade: true,
+		}))
+		.pipe(concat('style.css'))
+		.pipe(gulp.dest(dest.styles));
 });
 
 gulp.task('images', ['clean_images'], () => {
