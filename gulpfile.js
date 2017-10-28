@@ -30,9 +30,7 @@ gulp.task('clean_scripts', function(){
 	return del('build/static/app.js');
 });
 
-gulp.task('clean_styles', function(){
-	return del('build/static/main.css');
-});
+gulp.task('clean_styles', () => del(`${dest.styles}/style.css`));
 
 gulp.task('clean_images', function(){
 	return del('build/static/images');
