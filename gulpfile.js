@@ -58,7 +58,6 @@ gulp.task('styles', ['clean_styles'], () => {
 			browsers: ['last 4 versions'],
 			cascade: true,
 		}))
-		.pipe(concat('style.css'))
 		.pipe(gulp.dest(dest.styles));
 });
 
