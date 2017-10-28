@@ -28,13 +28,6 @@ const dest = {
 	icons: 'build/assets/icons',
 }
 
-const paths = {
-	json:		'src/static/json',
-	scripts:	['src/static/app.js', 'src/static/scripts/*.js'],
-	styles:		'src/static/main.sass',
-	images:		'src/static/images/*',
-};
-
 gulp.task('clean_json', function(){
 	return del('build/static/*.json');
 });
