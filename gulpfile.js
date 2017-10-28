@@ -8,6 +8,7 @@ const del = require('del');
 
 
 const src = {
+	serverEntry: 'server/main.js',
 	scriptsEntry: 'src/index.js',
 	scripts: 'src/**/*.js',
 	worker: 'src/service_worker.js',
