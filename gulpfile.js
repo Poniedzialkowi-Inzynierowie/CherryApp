@@ -19,6 +19,15 @@ const src = {
 	icons: 'src/assets/icons',
 }
 
+const dest = {
+	scripts: 'build',
+	worker: 'build',
+	styles: 'build',
+	assets: 'build/assets',
+	images: 'build/assets/images',
+	icons: 'build/assets/icons',
+}
+
 const paths = {
 	json:		'src/static/json',
 	scripts:	['src/static/app.js', 'src/static/scripts/*.js'],
