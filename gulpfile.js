@@ -7,6 +7,18 @@ const exec = require('child_process').exec;
 const del = require('del');
 
 
+const src = {
+	scripts: [
+		'src/index.js',
+		'src/components/*.js',
+	],
+	worker: 'src/service_worker.js',
+	styles: 'src/styles/index.scss',
+	assets: 'src/styles/*',
+	images: 'src/assets/images',
+	icons: 'src/assets/icons',
+}
+
 const paths = {
 	json:		'src/static/json',
 	scripts:	['src/static/app.js', 'src/static/scripts/*.js'],
