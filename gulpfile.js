@@ -8,10 +8,8 @@ const del = require('del');
 
 
 const src = {
-	scripts: [
-		'src/index.js',
-		'src/components/*.js',
-	],
+	scriptsEntry: 'src/index.js',
+	scripts: 'src/**/*.js',
 	worker: 'src/service_worker.js',
 	styles: 'src/styles/index.scss',
 	assets: 'src/assets/*',
