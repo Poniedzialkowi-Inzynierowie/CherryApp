@@ -6,7 +6,6 @@ const autoprefixer = require('gulp-autoprefixer');
 const exec = require('child_process').exec;
 const del = require('del');
 
-// ------------------------------------------------------------------------- //
 
 const paths = {
 	json:		'src/static/json',
@@ -14,8 +13,6 @@ const paths = {
 	styles:		'src/static/main.sass',
 	images:		'src/static/images/*',
 };
-
-// ------------------------------------------------------------------------- //
 
 gulp.task('clean_json', function(){
 	return del('build/static/*.json');
@@ -33,8 +30,6 @@ gulp.task('clean_images', function(){
 	return del('build/static/images');
 });
 
-// ------------------------------------------------------------------------- //
-
 gulp.task('server', function(){
 	exec('node src/server.js', function (err, stdout, stderr) {
 		console.log(stdout);
@@ -42,8 +37,7 @@ gulp.task('server', function(){
 	});
 });
 
-// ------------------------------------------------------------------------- //
-// FEXME: Add sourcemaps to sass, and js files
+// FIXME: Add sourcemaps to sass, and js files
 
 gulp.task('json', function() {
 	return gulp.src(paths.json)
@@ -75,8 +69,6 @@ gulp.task('images', ['clean_images'], function() {
 	.pipe(gulp.dest('build/static/images'));
 });
 
-// ------------------------------------------------------------------------- //
-
 // Rerun the task when a file changes
 gulp.task('watch', function() {
 	gulp.watch(	paths.json,		['json']	);
@@ -84,8 +76,6 @@ gulp.task('watch', function() {
 	gulp.watch(	paths.styles,		['styles']	);
 	gulp.watch(	paths.images,		['images']	);
 });
-
-// ------------------------------------------------------------------------- //
 
 // The `default` task (called when you run `gulp` from cli)
 gulp.task('default', ['watch', 'build', 'server']);
