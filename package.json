@@ -10,11 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/Poniedzialkowi-Inzynierowie/CherryApp.git"
   },
-  "author": [
+  "contributors": [
     "Kacper Skrzynski <adamn.zxc@gmail.com>",
-    "",
-    "",
-    ""
+    "Alan Borowy <selfish570@gmail.com>",
+    "Jan Szachno <j.szachno@gmail.com>",
+    "Piotr Stadnicki <pitstadnicki@gmail.com>"
   ],
   "license": "GPLv3",
   "bugs": {
