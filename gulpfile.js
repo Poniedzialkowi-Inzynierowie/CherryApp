@@ -1,14 +1,14 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var autoprefixer = require('gulp-autoprefixer');
-var exec = require('child_process').exec;
-var del = require('del');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const autoprefixer = require('gulp-autoprefixer');
+const exec = require('child_process').exec;
+const del = require('del');
 
 // ------------------------------------------------------------------------- //
 
-var paths = {
+const paths = {
 	json:		'src/static/json',
 	scripts:	['src/static/app.js', 'src/static/scripts/*.js'],
 	styles:		'src/static/main.sass',
