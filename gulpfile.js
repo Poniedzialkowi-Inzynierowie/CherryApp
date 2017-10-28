@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var pug = require('gulp-pug');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
@@ -11,21 +10,15 @@ var del = require('del');
 
 var paths = {
 	json:		'src/static/json',
-	templates:	'src/static/templates/*.pug',
 	scripts:	['src/static/app.js', 'src/static/scripts/*.js'],
 	styles:		'src/static/main.sass',
 	images:		'src/static/images/*',
-	html_to_pug:	'src/html/*.html'
 };
 
 // ------------------------------------------------------------------------- //
 
 gulp.task('clean_json', function(){
 	return del('build/static/*.json');
-});
-
-gulp.task('clean_templates', function(){
-	return del('build/static/templates');
 });
 
 gulp.task('clean_scripts', function(){
@@ -38,10 +31,6 @@ gulp.task('clean_styles', function(){
 
 gulp.task('clean_images', function(){
 	return del('build/static/images');
-});
-
-gulp.task('clean_html_to_pug', function(){
-	return del('build/static/templates');
 });
 
 // ------------------------------------------------------------------------- //
@@ -59,12 +48,6 @@ gulp.task('server', function(){
 gulp.task('json', function() {
 	return gulp.src(paths.json)
 	.pipe(gulp.dest('build/static/json'));
-});
-
-gulp.task('templates', ['clean_templates'], function() {
-	return gulp.src(paths.templates)
-	.pipe(pug())
-	.pipe(gulp.dest('build/static/templates'));
 });
 
 gulp.task('scripts', ['clean_scripts'], function() {
@@ -97,7 +80,6 @@ gulp.task('images', ['clean_images'], function() {
 // Rerun the task when a file changes
 gulp.task('watch', function() {
 	gulp.watch(	paths.json,		['json']	);
-	gulp.watch(	paths.templates,	['templates']	);
 	gulp.watch(	paths.scripts,		['scripts']	);
 	gulp.watch(	paths.styles,		['styles']	);
 	gulp.watch(	paths.images,		['images']	);
@@ -110,12 +92,12 @@ gulp.task('default', ['watch', 'build', 'server']);
 
 // The `build` task moves and compiles files to end folder;
 // (called when you run `gulp build` from cli)
-gulp.task('build', ['json', 'templates',  'scripts', 'styles', 'images']);
+gulp.task('build', ['json',  'scripts', 'styles', 'images']);
 
 // The `clean` task removes files from end folder;
 // (called when you run `gulp clean` from cli)
 gulp.task('clean', [
-	'clean_json', 'clean_templates',
+	'clean_json',
 	'clean_scripts', 'clean_styles',
 	'clean_images'
 ]);
