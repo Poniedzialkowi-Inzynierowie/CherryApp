@@ -3,6 +3,7 @@ const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const autoprefixer = require('gulp-autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
 const exec = require('child_process').exec;
 const del = require('del');
 
@@ -52,12 +53,14 @@ gulp.task('scripts', ['clean_scripts'], function() {
 
 gulp.task('styles', ['clean_styles'], () => {
 	return gulp.src(src.styles)
+		.pipe(sourcemaps.init())
 		.pipe(sass({outputStyle: 'compressed'})
 			.on('error', sass.logError))
 		.pipe(autoprefixer({
 			browsers: ['last 4 versions'],
 			cascade: true,
 		}))
+		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(dest.styles));
 });
 
