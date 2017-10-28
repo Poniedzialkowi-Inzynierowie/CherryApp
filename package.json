@@ -1,8 +1,8 @@
 {
   "name": "cherryapp",
   "version": "0.1.0",
-  "description": "",
-  "main": "src/.js",
+  "description": "Progressive web application made for Technikum Mechatroniczne nr 1 in Warsaw.",
+  "main": "server/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
