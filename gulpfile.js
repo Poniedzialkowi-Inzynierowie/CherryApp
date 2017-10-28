@@ -32,9 +32,7 @@ gulp.task('clean_scripts', function(){
 
 gulp.task('clean_styles', () => del(`${dest.styles}/style.css`));
 
-gulp.task('clean_images', function(){
-	return del('build/static/images');
-});
+gulp.task('clean_images', () => del(dest.images));
 
 gulp.task('server', function(){
 	exec('node src/server.js', function (err, stdout, stderr) {
