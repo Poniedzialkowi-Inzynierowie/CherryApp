@@ -28,10 +28,6 @@ const dest = {
 	icons: 'build/assets/icons',
 }
 
-gulp.task('clean_json', function(){
-	return del('build/static/*.json');
-});
-
 gulp.task('clean_scripts', function(){
 	return del('build/static/app.js');
 });
@@ -52,11 +48,6 @@ gulp.task('server', function(){
 });
 
 // FIXME: Add sourcemaps to sass, and js files
-
-gulp.task('json', function() {
-	return gulp.src(paths.json)
-	.pipe(gulp.dest('build/static/json'));
-});
 
 gulp.task('scripts', ['clean_scripts'], function() {
 // Minify and copy all JavaScript files
@@ -85,7 +76,6 @@ gulp.task('images', ['clean_images'], function() {
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
-	gulp.watch(	paths.json,		['json']	);
 	gulp.watch(	paths.scripts,		['scripts']	);
 	gulp.watch(	paths.styles,		['styles']	);
 	gulp.watch(	paths.images,		['images']	);
@@ -96,12 +86,11 @@ gulp.task('default', ['watch', 'build', 'server']);
 
 // The `build` task moves and compiles files to end folder;
 // (called when you run `gulp build` from cli)
-gulp.task('build', ['json',  'scripts', 'styles', 'images']);
+gulp.task('build', ['scripts', 'styles', 'images']);
 
 // The `clean` task removes files from end folder;
 // (called when you run `gulp clean` from cli)
 gulp.task('clean', [
-	'clean_json',
 	'clean_scripts', 'clean_styles',
 	'clean_images'
 ]);
