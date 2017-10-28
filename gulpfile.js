@@ -4,7 +4,6 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var autoprefixer = require('gulp-autoprefixer');
-var html2pug = require('gulp-html2jade');
 var exec = require('child_process').exec;
 var del = require('del');
 
@@ -91,15 +90,6 @@ gulp.task('images', ['clean_images'], function() {
 // Copy all static images
 	return gulp.src(paths.images)
 	.pipe(gulp.dest('build/static/images'));
-});
-
-// ------------------------------------------------------------------------- //
-
-gulp.task('html_to_pug', function() {
-// For lazyness; it will convert your stupid html
-	return gulp.src(paths.html_to_pug)
-	.pipe(html2pug({nspaces:4,tabs:true}))
-	.pipe(gulp.dest('src/pug_raw'));
 });
 
 // ------------------------------------------------------------------------- //
