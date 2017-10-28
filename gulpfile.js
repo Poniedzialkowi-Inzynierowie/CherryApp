@@ -14,7 +14,7 @@ const src = {
 	],
 	worker: 'src/service_worker.js',
 	styles: 'src/styles/index.scss',
-	assets: 'src/styles/*',
+	assets: 'src/assets/*',
 	images: 'src/assets/images',
 	icons: 'src/assets/icons',
 }
