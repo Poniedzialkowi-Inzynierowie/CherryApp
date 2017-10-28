@@ -61,10 +61,9 @@ gulp.task('styles', ['clean_styles'], function(){
 	.pipe(gulp.dest('build/static'));
 });
 
-gulp.task('images', ['clean_images'], function() {
-// Copy all static images
-	return gulp.src(paths.images)
-	.pipe(gulp.dest('build/static/images'));
+gulp.task('images', ['clean_images'], () => {
+	return gulp.src(src.images)
+		.pipe(gulp.dest(dest.images));
 });
 
 // Rerun the task when a file changes
@@ -84,6 +83,7 @@ gulp.task('build', ['scripts', 'styles', 'images']);
 // The `clean` task removes files from end folder;
 // (called when you run `gulp clean` from cli)
 gulp.task('clean', [
-	'clean_scripts', 'clean_styles',
-	'clean_images'
+	'clean_scripts',
+	'clean_styles',
+	'clean_images',
 ]);
