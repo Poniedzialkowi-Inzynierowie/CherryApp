@@ -5,6 +5,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var autoprefixer = require('gulp-autoprefixer');
 var html2pug = require('gulp-html2jade');
+var exec = require('child_process').exec;
 var del = require('del');
 
 // ------------------------------------------------------------------------- //
@@ -42,6 +43,15 @@ gulp.task('clean_images', function(){
 
 gulp.task('clean_html_to_pug', function(){
 	return del('build/static/templates');
+});
+
+// ------------------------------------------------------------------------- //
+
+gulp.task('server', function(){
+	exec('node src/server.js', function (err, stdout, stderr) {
+		console.log(stdout);
+		console.log(stderr);
+	});
 });
 
 // ------------------------------------------------------------------------- //
@@ -106,7 +116,7 @@ gulp.task('watch', function() {
 // ------------------------------------------------------------------------- //
 
 // The `default` task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'build']);
+gulp.task('default', ['watch', 'build', 'server']);
 
 // The `build` task moves and compiles files to end folder;
 // (called when you run `gulp build` from cli)
@@ -115,7 +125,7 @@ gulp.task('build', ['json', 'templates',  'scripts', 'styles', 'images']);
 // The `clean` task removes files from end folder;
 // (called when you run `gulp clean` from cli)
 gulp.task('clean', [
-	'clean_json', 'clean_templates'
+	'clean_json', 'clean_templates',
 	'clean_scripts', 'clean_styles',
 	'clean_images'
 ]);
