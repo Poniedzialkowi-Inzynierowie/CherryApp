@@ -17,6 +17,8 @@ const exec = require('child_process').exec;
 // TODO: add conditional builds to disable sourcemaps in production
 // TODO: add heroku server build to package.json
 // TODO: add live browser reload on file change
+// TODO: add static analysis tools to project
+// TODO: setup unit testing for server and components
 
 // Paths to source files
 const src = {
