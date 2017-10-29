@@ -127,7 +127,7 @@ const endSourcemapIfNotProduction = () => {
 	return config.production ? gutil.noop() : sourcemaps.write();
 }
 
-const handleError = function (...args) {
+const handleError = (...args) => {
   notify.onError({
     title: 'Compile Error',
     message: '<%= error.message %>'
