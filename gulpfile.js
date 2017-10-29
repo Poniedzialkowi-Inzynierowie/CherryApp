@@ -34,13 +34,13 @@ const src = {
 const dest = {
 	htmlEntry: 'build',
 	scripts: 'build',
-	styles: 'build/style.min.css',
+	styles: 'build',
 	assets: 'build/assets',
 }
 
 gulp.task('default', ['build', 'server', 'watch']);
 
-gulp.task('build', ['scripts', 'styles', 'assets', 'html']);
+gulp.task('build', ['assets', 'scripts', 'styles', 'html']);
 
 gulp.task('clean', () => del('build'));
 
@@ -51,7 +51,7 @@ gulp.task('assets', ['clean_assets'], () => {
 
 gulp.task('clean_assets', () => del(dest.assets));
 
-gulp.task('html', () => {
+gulp.task('html', ['clean'], () => {
 	return gulp.src(src.htmlEntry)
 		.pipe(gulp.dest(dest.htmlEntry));
 })
@@ -75,7 +75,7 @@ gulp.task('scripts', ['clean'], () => {
 
 	return b.bundle()
 			.on('error', handleError)
-		.pipe(source('bundle.min.js'))
+		.pipe(source('bundle.js'))
 		.pipe(gulp.dest(dest.scripts))
 		.pipe(buffer())
 		.pipe(sourcemaps.init({loadMaps: true}))
@@ -97,6 +97,7 @@ gulp.task('watch', () => {
 	gulp.watch([src.scriptsEntry, ...src.scripts], ['scripts']);
 	gulp.watch(src.styles, ['styles']);
 	gulp.watch(src.assets, ['assets']);
+	gulp.watch(src.htmlEntry, ['html']);
 });
 
 const handleError = function (...args) {
