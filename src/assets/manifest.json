@@ -10,7 +10,7 @@
   "prefer_related_applications": false,
   "description": "Progressive web application made for Technikum Mechatroniczne nr 1 in Warsaw.",
   "icons": [{
-    "src": "favicon.ico",
+    "src": "icons/favicon.ico",
     "sizes": "128x128"
   }]
 }
