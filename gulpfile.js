@@ -18,6 +18,7 @@ const exec = require('child_process').exec;
 const src = {
 	serverEntry: 'server/main.js',
 	scriptsEntry: 'src/index.js',
+	htmlEntry: 'src/index.html',
 	scripts: [
 		'src/components/**/*.js',
 		'src/service_worker.js',
@@ -28,6 +29,7 @@ const src = {
 
 // Paths to built files destinations
 const dest = {
+	htmlEntry: 'build',
 	scripts: 'build',
 	styles: 'build',
 	assets: 'build/assets',
@@ -45,6 +47,11 @@ gulp.task('assets', ['clean_assets'], () => {
 })
 
 gulp.task('clean_assets', () => del(dest.assets));
+
+gulp.task('html', () => {
+	return gulp.src(src.htmlEntry)
+		.pipe(gulp.dest(dest.htmlEntry));
+})
 
 gulp.task('styles', ['clean'], () => {
 	return gulp.src(src.styles)
