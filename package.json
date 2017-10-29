@@ -33,7 +33,6 @@
     "express": "^4.15.5",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
-    "gulp-concat": "^2.6.1",
     "gulp-notify": "^3.0.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
