@@ -59,7 +59,7 @@ gulp.task('styles', ['clean'], () => {
 		.pipe(gulp.dest(dest.styles));
 });
 
-gulp.task('scripts', ['clean', 'worker'], () => {
+gulp.task('scripts', ['clean'], () => {
 	const b = browserify(src.scriptsEntry, {debug: true})
 		.transform('babelify', {sourceMaps: true})
 
