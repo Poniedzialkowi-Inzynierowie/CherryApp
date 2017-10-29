@@ -41,23 +41,23 @@ const dest = {
 
 gulp.task('default', ['build', 'server', 'watch']);
 
-gulp.task('build', ['assets', 'scripts', 'styles', 'html']);
+gulp.task('build', ['clean'], () => {
+	gulp.start('assets', 'scripts', 'styles', 'html');
+});
 
 gulp.task('clean', () => del('build'));
 
-gulp.task('assets', ['clean_assets'], () => {
+gulp.task('assets', () => {
 	return gulp.src(src.assets)
 		.pipe(gulp.dest(dest.assets));
 })
 
-gulp.task('clean_assets', () => del(dest.assets));
-
-gulp.task('html', ['clean'], () => {
+gulp.task('html', () => {
 	return gulp.src(src.htmlEntry)
 		.pipe(gulp.dest(dest.htmlEntry));
 })
 
-gulp.task('styles', ['clean'], () => {
+gulp.task('styles', () => {
 	return gulp.src(src.styles)
 		.pipe(sourcemaps.init())
 		.pipe(sass({outputStyle: 'compressed'})
@@ -70,7 +70,7 @@ gulp.task('styles', ['clean'], () => {
 		.pipe(gulp.dest(dest.styles));
 });
 
-gulp.task('scripts', ['clean'], () => {
+gulp.task('scripts', () => {
 	const b = browserify(src.scriptsEntry, {debug: true})
 		.transform('babelify', {sourceMaps: true})
 
