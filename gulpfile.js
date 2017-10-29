@@ -37,7 +37,7 @@ const dest = {
 
 gulp.task('default', ['build', 'server', 'watch']);
 
-gulp.task('build', ['scripts', 'styles', 'assets']);
+gulp.task('build', ['scripts', 'styles', 'assets', 'html']);
 
 gulp.task('clean', () => del('build'));
 
