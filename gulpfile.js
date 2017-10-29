@@ -17,7 +17,6 @@ const exec = require('child_process').exec;
 const browserSync = require('browser-sync');
 const reload = browserSync.reload;
 
-// TODO: add live browser reload on file change
 // TODO: add static analysis tools to project
 // TODO: setup unit testing for server and components
 // TODO: add external config where development localhost port is set
