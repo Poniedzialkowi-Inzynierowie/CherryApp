@@ -58,12 +58,14 @@ gulp.task('clean', () => del('build'));
 
 gulp.task('assets', () => {
 	return gulp.src(src.assets)
-		.pipe(gulp.dest(dest.assets));
+		.pipe(gulp.dest(dest.assets))
+		.pipe(reload({stream:true}))
 });
 
 gulp.task('html', () => {
 	return gulp.src(src.htmlEntry)
-		.pipe(gulp.dest(dest.htmlEntry));
+		.pipe(gulp.dest(dest.htmlEntry))
+		.pipe(reload({stream:true}))
 });
 
 gulp.task('styles', () => {
@@ -76,7 +78,8 @@ gulp.task('styles', () => {
 			cascade: true,
 		}))
 		.pipe(endSourcemapIfNotProduction())
-		.pipe(gulp.dest(dest.styles));
+		.pipe(gulp.dest(dest.styles))
+		.pipe(reload({stream:true}))
 });
 
 gulp.task('scripts', () => {
@@ -94,6 +97,7 @@ gulp.task('scripts', () => {
 			.on('error', handleError)
 		.pipe(endSourcemapIfNotProduction())
 		.pipe(gulp.dest(dest.scripts))
+		.pipe(reload({stream:true}))
 });
 
 gulp.task('server', () => {
