@@ -22,7 +22,7 @@ const src = {
 		'src/components/**/*.js',
 		'src/service_worker.js',
 	],
-	styles: 'src/styles/index.scss',
+	styles: 'src/styles/**/*.scss',
 	assets: 'src/assets/**/*',
 }
 
@@ -84,7 +84,7 @@ gulp.task('server', () => {
 });
 
 gulp.task('watch', () => {
-	gulp.watch(src.scripts, ['scripts']);
+	gulp.watch([src.scriptsEntry, ...src.scripts], ['scripts']);
 	gulp.watch(src.styles, ['styles']);
 	gulp.watch(src.assets, ['assets']);
 });
