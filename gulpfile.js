@@ -33,6 +33,7 @@ const src = {
 	htmlEntry: 'src/index.html',
 	scripts: [
 		'src/components/**/*.js',
+		'src/util/**/*.js',
 	],
 	worker: 'src/service_worker.js',
 	styles: 'src/styles/**/*.scss',
@@ -117,6 +118,7 @@ gulp.task('watch', () => {
 	gulp.watch(src.styles, ['styles']);
 	gulp.watch(src.assets, ['assets']);
 	gulp.watch(src.htmlEntry, ['html']);
+	gulp.watch(src.worker, ['worker']);
 });
 
 gulp.task('browser-sync', () => {
