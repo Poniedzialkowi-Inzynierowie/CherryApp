@@ -59,7 +59,7 @@ gulp.task('scripts', ['clean_scripts'], () => {
 		.pipe(buffer())
 		.pipe(sourcemaps.init({loadMaps: true}))
 			.on('error', handleError)
-			//.pipe(uglify())
+			.pipe(uglify())
 			.on('error', handleError)
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(dest.scripts))
