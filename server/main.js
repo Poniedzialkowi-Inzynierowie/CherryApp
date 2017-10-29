@@ -1,8 +1,4 @@
-const fs = require('fs');
-const http = require('http');
 const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 
 const port = process.env.PORT || 8080;
 
