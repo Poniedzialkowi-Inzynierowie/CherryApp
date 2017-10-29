@@ -14,9 +14,7 @@ const src = {
 	scripts: 'src/**/*.js',
 	worker: 'src/service_worker.js',
 	styles: 'src/styles/index.scss',
-	assets: 'src/assets/*',
-	images: 'src/assets/images',
-	icons: 'src/assets/icons',
+	assets: 'src/assets/**/*',
 }
 
 const dest = {
@@ -24,15 +22,18 @@ const dest = {
 	worker: 'build',
 	styles: 'build',
 	assets: 'build/assets',
-	images: 'build/assets/images',
-	icons: 'build/assets/icons',
 }
 
-gulp.task('clean_scripts', () =>del(dest.scripts));
+gulp.task('clean_scripts', () => del(dest.scripts));
 
 gulp.task('clean_styles', () => del(dest.styles));
 
-gulp.task('clean_images', () => del(dest.images));
+gulp.task('clean_assets', () => del(dest.assets));
+
+gulp.task('assets', ['clean_assets'], () => {
+	return gulp.src(src.assets)
+		.pipe(gulp.dest(dest.assets));
+})
 
 gulp.task('server', () => {
 	exec(`node ${src.serverEntry}`, (err, stdout, stderr) => {
@@ -62,11 +63,6 @@ gulp.task('styles', ['clean_styles'], () => {
 		}))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(dest.styles));
-});
-
-gulp.task('images', ['clean_images'], () => {
-	return gulp.src(src.images)
-		.pipe(gulp.dest(dest.images));
 });
 
 // Rerun the task when a file changes
