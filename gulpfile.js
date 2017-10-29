@@ -14,10 +14,13 @@ const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 // server
 const exec = require('child_process').exec;
+const browserSync = require('browser-sync');
+const reload = browserSync.reload;
 
 // TODO: add live browser reload on file change
 // TODO: add static analysis tools to project
 // TODO: setup unit testing for server and components
+// TODO: add external config where development localhost port is set
 
 const config = {
 	server: 'server/main.js',
@@ -45,7 +48,7 @@ const dest = {
 	assets: 'build/assets',
 };
 
-gulp.task('default', ['build', 'server', 'watch']);
+gulp.task('default', ['build', 'server', 'watch', 'browser-sync']);
 
 gulp.task('build', ['clean'], () => {
 	gulp.start('assets', 'scripts', 'styles', 'html');
@@ -105,6 +108,12 @@ gulp.task('watch', () => {
 	gulp.watch(src.styles, ['styles']);
 	gulp.watch(src.assets, ['assets']);
 	gulp.watch(src.htmlEntry, ['html']);
+});
+
+gulp.task('browser-sync', () => {
+	browserSync({
+		proxy: 'localhost:8080',
+	});
 });
 
 const startSourcemapIfNotProduction = () => {
