@@ -15,7 +15,6 @@ const buffer = require('vinyl-buffer');
 // server
 const exec = require('child_process').exec;
 
-// TODO: add heroku server build to package.json
 // TODO: add live browser reload on file change
 // TODO: add static analysis tools to project
 // TODO: setup unit testing for server and components
