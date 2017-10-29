@@ -20,8 +20,8 @@ const src = {
 	scriptsEntry: 'src/index.js',
 	scripts: [
 		'src/components/**/*.js',
+		'src/service_worker.js',
 	],
-	worker: 'src/service_worker.js',
 	styles: 'src/styles/index.scss',
 	assets: 'src/assets/**/*',
 }
@@ -29,7 +29,6 @@ const src = {
 // Paths to built files destinations
 const dest = {
 	scripts: 'build',
-	worker: 'build',
 	styles: 'build',
 	assets: 'build/assets',
 }
@@ -60,7 +59,7 @@ gulp.task('styles', ['clean'], () => {
 		.pipe(gulp.dest(dest.styles));
 });
 
-gulp.task('scripts', ['clean'], () => {
+gulp.task('scripts', ['clean', 'worker'], () => {
 	const b = browserify(src.scriptsEntry, {debug: true})
 		.transform('babelify', {sourceMaps: true})
 
