@@ -34,7 +34,7 @@ const src = {
 const dest = {
 	htmlEntry: 'build',
 	scripts: 'build',
-	styles: 'build',
+	styles: 'build/style.min.css',
 	assets: 'build/assets',
 }
 
