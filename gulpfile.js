@@ -33,8 +33,8 @@ const src = {
 	htmlEntry: 'src/index.html',
 	scripts: [
 		'src/components/**/*.js',
-		'src/service_worker.js',
 	],
+	worker: 'src/service_worker.js',
 	styles: 'src/styles/**/*.scss',
 	assets: 'src/assets/**/*',
 };
@@ -50,7 +50,7 @@ const dest = {
 gulp.task('default', ['build', 'server', 'watch', 'browser-sync']);
 
 gulp.task('build', ['clean'], () => {
-	gulp.start('assets', 'scripts', 'styles', 'html');
+	gulp.start('assets', 'scripts', 'styles', 'html', 'worker');
 });
 
 gulp.task('clean', () => del('build'));
@@ -64,6 +64,12 @@ gulp.task('assets', () => {
 gulp.task('html', () => {
 	return gulp.src(src.htmlEntry)
 		.pipe(gulp.dest(dest.htmlEntry))
+		.pipe(reload({stream:true}))
+});
+
+gulp.task('worker', () => {
+	return gulp.src(src.worker)
+		.pipe(gulp.dest(dest.scripts))
 		.pipe(reload({stream:true}))
 });
 
