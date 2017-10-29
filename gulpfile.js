@@ -4,14 +4,20 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const autoprefixer = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 const exec = require('child_process').exec;
 const del = require('del');
+const notify = require('gulp-notify');
 
 
 const src = {
 	serverEntry: 'server/main.js',
 	scriptsEntry: 'src/index.js',
-	scripts: 'src/**/*.js',
+	scripts: [
+		'src/components/**/*.js',
+	],
 	worker: 'src/service_worker.js',
 	styles: 'src/styles/index.scss',
 	assets: 'src/assets/**/*',
@@ -42,14 +48,21 @@ gulp.task('server', () => {
 	});
 });
 
-// FIXME: Add sourcemaps to sass, and js files
+gulp.task('scripts', ['clean_scripts'], () => {
+	const b = browserify(src.scriptsEntry, {debug: true})
+		.transform('babelify', {sourceMaps: true})
 
-gulp.task('scripts', ['clean_scripts'], function() {
-// Minify and copy all JavaScript files
-// FIXME: pass files to `uglify()`
-	return gulp.src(paths.scripts)
-	.pipe(concat('app.js'))
-	.pipe(gulp.dest('build/static'));
+	return b.bundle()
+			.on('error', handleError)
+		.pipe(source('bundle.min.js'))
+		.pipe(gulp.dest(dest.scripts))
+		.pipe(buffer())
+		.pipe(sourcemaps.init({loadMaps: true}))
+			.on('error', handleError)
+			//.pipe(uglify())
+			.on('error', handleError)
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest(dest.scripts))
 });
 
 gulp.task('styles', ['clean_styles'], () => {
@@ -86,3 +99,11 @@ gulp.task('clean', [
 	'clean_styles',
 	'clean_images',
 ]);
+
+const handleError = function (...args) {
+  notify.onError({
+    title: 'Compile Error',
+    message: '<%= error.message %>'
+  }).apply(this, args);
+  this.emit('end'); // Keep gulp from hanging on this task
+}
