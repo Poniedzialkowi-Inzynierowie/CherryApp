@@ -79,8 +79,9 @@ gulp.task('worker', () => {
 			});
 			
 		return gulp.src(`${config.rootDir}/service-worker.js`)
-				.pipe(gulp.dest(dest.scripts))
-				.pipe(reload({stream:true}))
+			.pipe(uglify())
+			.pipe(gulp.dest(dest.scripts))
+			.pipe(reload({stream:true}))
 	  });
 
 gulp.task('styles', () => {
