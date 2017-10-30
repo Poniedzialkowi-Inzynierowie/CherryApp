@@ -50,7 +50,9 @@ const dest = {
 	assets: 'build/assets',
 };
 
-gulp.task('default', ['build', 'server', 'watch', 'browser-sync']);
+gulp.task('default', ['build'], () => {
+	gulp.start(['server', 'watch', 'browser-sync']);
+});
 
 gulp.task('build', ['clean'], () => {
 	gulp.start('assets', 'scripts', 'styles', 'html', 'worker');
@@ -70,16 +72,12 @@ gulp.task('html', () => {
 		.pipe(reload({stream:true}))
 });
 
-// gulp.task('worker', () => {
-//
-// });
-
 gulp.task('worker', () => {
-
 		swPrecache.write(`${config.rootDir}/service-worker.js`, {
 	    taticFileGlobs: [config.rootDir + '/**/*.{js,html,css,png,jpg,gif}'],
 	     stripPrefix: config.rootDir
-	    });
+			});
+			
 		return gulp.src(`${config.rootDir}/service-worker.js`)
 				.pipe(gulp.dest(dest.scripts))
 				.pipe(reload({stream:true}))
