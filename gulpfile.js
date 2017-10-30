@@ -12,6 +12,7 @@ const browserify = require('browserify');
 const uglify = require('gulp-uglify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
+const swPrecache = require('sw-precache');
 // server
 const exec = require('child_process').exec;
 const browserSync = require('browser-sync');
@@ -25,6 +26,7 @@ const config = {
 	server: 'server/main.js',
 	// to run producton build use `gulp build --production`
 	production: !!gutil.env.production,
+	rootDir: 'src'
 };
 
 // Paths to source files
@@ -68,11 +70,20 @@ gulp.task('html', () => {
 		.pipe(reload({stream:true}))
 });
 
+// gulp.task('worker', () => {
+//
+// });
+
 gulp.task('worker', () => {
-	return gulp.src(src.worker)
-		.pipe(gulp.dest(dest.scripts))
-		.pipe(reload({stream:true}))
-});
+
+		swPrecache.write(`${config.rootDir}/service-worker.js`, {
+	    taticFileGlobs: [config.rootDir + '/**/*.{js,html,css,png,jpg,gif}'],
+	     stripPrefix: config.rootDir
+	    });
+		return gulp.src(`${config.rootDir}/service-worker.js`)
+				.pipe(gulp.dest(dest.scripts))
+				.pipe(reload({stream:true}))
+	  });
 
 gulp.task('styles', () => {
 	return gulp.src(src.styles)
