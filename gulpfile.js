@@ -12,6 +12,7 @@ const browserify = require('browserify');
 const uglify = require('gulp-uglify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
+const wbBuild = require('workbox-build');
 // server
 const exec = require('child_process').exec;
 const browserSync = require('browser-sync');
@@ -51,7 +52,7 @@ const dest = {
 gulp.task('default', ['build', 'server', 'watch', 'browser-sync']);
 
 gulp.task('build', ['clean'], () => {
-	gulp.start('assets', 'scripts', 'styles', 'html', 'worker');
+	gulp.start('assets', 'scripts', 'styles', 'html');
 });
 
 gulp.task('clean', () => del('build'));
@@ -68,11 +69,6 @@ gulp.task('html', () => {
 		.pipe(reload({stream:true}))
 });
 
-gulp.task('worker', () => {
-	return gulp.src(src.worker)
-		.pipe(gulp.dest(dest.scripts))
-		.pipe(reload({stream:true}))
-});
 
 gulp.task('styles', () => {
 	return gulp.src(src.styles)
