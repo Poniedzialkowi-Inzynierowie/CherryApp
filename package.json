@@ -43,6 +43,7 @@
     "helmet": "^3.9.0",
     "preact": "^8.2.6",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "workbox-build": "^2.1.0"
   }
 }

@@ -36,7 +36,6 @@ const src = {
 		'src/components/**/*.js',
 		'src/util/**/*.js',
 	],
-	worker: 'src/service_worker.js',
 	styles: 'src/styles/**/*.scss',
 	assets: 'src/assets/**/*',
 };
@@ -52,7 +51,7 @@ const dest = {
 gulp.task('default', ['build', 'server', 'watch', 'browser-sync']);
 
 gulp.task('build', ['clean'], () => {
-	gulp.start('assets', 'scripts', 'styles', 'html');
+	gulp.start('assets', 'scripts', 'styles', 'html', 'bundle-sw');
 });
 
 gulp.task('clean', () => del('build'));
@@ -138,3 +137,21 @@ const handleError = function(...args) {
   }).apply(this, args);
   this.emit('end'); // Keep gulp from hanging on this task
 }
+
+//gulp.task('bundle-sw', () => {});
+
+gulp.task('bundle-sw', () => {
+   return wbBuild.generateSW({
+     globDirectory: './build',
+     swDest: './build/sw.js',
+     globPatterns: ['**\/*.{html,js,css}'],
+     globIgnores: ['admin.html'],
+
+   })
+   .then(() => {
+     console.log('Service worker generated.');
+   })
+   .catch((err) => {
+     console.log('[ERROR] This happened: ' + err);
+   })
+})
