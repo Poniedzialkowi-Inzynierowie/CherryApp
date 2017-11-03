@@ -1,9 +1,9 @@
-const { h, render, Component } = require('preact');
+const { h, render, Component } = require('preact') // eslint-disable-line no-unused-vars
 
 class Test extends Component {
-    render() {
-        return <h1>Hello world!</h1>;
-    }
+  render () {
+    return <h1>Hello world!</h1>
+  }
 }
 
-module.exports = Test;
+module.exports = Test
