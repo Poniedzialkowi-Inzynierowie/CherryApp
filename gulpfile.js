@@ -26,6 +26,7 @@ const config = {
 	server: 'server/main.js',
 	// to run producton build use `gulp build --production`
 	production: !!gutil.env.production,
+	rootDir: 'src'
 };
 
 // Paths to source files
@@ -48,7 +49,9 @@ const dest = {
 	assets: 'build/assets',
 };
 
-gulp.task('default', ['build', 'server', 'watch', 'browser-sync']);
+gulp.task('default', ['build'], () => {
+	gulp.start(['server', 'watch', 'browser-sync']);
+});
 
 gulp.task('build', ['clean'], () => {
 	gulp.start('assets', 'scripts', 'styles', 'html', 'bundle-sw');
@@ -113,7 +116,6 @@ gulp.task('watch', () => {
 	gulp.watch(src.styles, ['styles']);
 	gulp.watch(src.assets, ['assets']);
 	gulp.watch(src.htmlEntry, ['html']);
-	gulp.watch(src.worker, ['worker']);
 });
 
 gulp.task('browser-sync', () => {
