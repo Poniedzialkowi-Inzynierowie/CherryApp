@@ -4,7 +4,7 @@ const gutil = require('gulp-util')
 const sourcemaps = require('gulp-sourcemaps')
 const notify = require('gulp-notify')
 const del = require('del')
-const runSequence = require('run-sequence');
+const runSequence = require('run-sequence')
 // styles
 const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
@@ -125,7 +125,8 @@ gulp.task('watch', () => {
 
 gulp.task('browser-sync', () => {
   browserSync({
-    proxy: 'localhost:8080'
+    proxy: 'localhost:8080',
+    port: '3001'
   })
 })
 
