@@ -55,7 +55,11 @@ gulp.task('default', ['build'], () => {
 })
 
 gulp.task('build', () => {
-  runSequence('clean', 'assets', 'scripts', 'styles', 'html', 'bundle-sw')
+  // sequence: clean build folder, run all build tasks in parallel, when done - generate service worker
+  runSequence('clean',
+    ['assets', 'scripts', 'styles', 'html'],
+    'bundle-sw'
+  )
 })
 
 gulp.task('clean', () => del('build'))
