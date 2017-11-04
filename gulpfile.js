@@ -146,7 +146,7 @@ gulp.task('bundle-sw', () => {
   return wbBuild.generateSW({
     globDirectory: './build',
     swDest: './build/sw.js',
-    globPatterns: ['**/*.{html,js,css}'],
+    globPatterns: ['**\/*.{html,js,css}'], // eslint-disable-line no-useless-escape
     globIgnores: ['admin.html']
 
   })
