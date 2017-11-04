@@ -2,6 +2,15 @@
 
 Aplikacja napisana dla Technikum Mechatronicznego nr 1 w Warszawie
 
+## Gdzie ją znaleźć?
+
+Wersja oficjalna (branch master): https://http://cherryapp-master.herokuapp.com/
+Wersja rozwijana (branch development): https://cherryapp-development.herokuapp.com/
+
+Istnieje również starsza, jednak w tym momencie nie rozwijana wersja aplikacji
+Jest ona utrzymywana, jednak nie będą do niej dodawane nowe funkcjonalności
+Dostępna jest pod adresem: https://ile-do-dzwonka.herokuapp.com/
+
 ## Edycja
 
 Projekt używa standardu [eslint-config-standard-preact](https://github.com/zouhir/eslint-config-standard-preact).  
