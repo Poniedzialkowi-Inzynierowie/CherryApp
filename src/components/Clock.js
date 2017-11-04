@@ -18,7 +18,7 @@ class Clock extends Component {
 
   render (props, state) {
     const time = new Date(state.time).toLocaleTimeString()
-    return <div>{ time }</div>
+    return <div id='clock'>{ time }</div>
   }
 }
 
