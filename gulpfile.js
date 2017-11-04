@@ -4,6 +4,7 @@ const gutil = require('gulp-util')
 const sourcemaps = require('gulp-sourcemaps')
 const notify = require('gulp-notify')
 const del = require('del')
+const runSequence = require('run-sequence');
 // styles
 const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
@@ -53,8 +54,8 @@ gulp.task('default', ['build'], () => {
   gulp.start(['server', 'watch', 'browser-sync'])
 })
 
-gulp.task('build', ['clean'], () => {
-  gulp.start('assets', 'scripts', 'styles', 'html', 'bundle-sw')
+gulp.task('build', () => {
+  runSequence('clean', 'assets', 'scripts', 'styles', 'html', 'bundle-sw')
 })
 
 gulp.task('clean', () => del('build'))
