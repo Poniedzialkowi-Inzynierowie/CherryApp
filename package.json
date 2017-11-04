@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node server/main.js",
     "heroku-postbuild": "gulp build --production",
-    "lint": "node_modules/.bin/eslint src/**/*.js *.js",
-    "lint-fix": "node_modules/.bin/eslint src/**/*.js *.js --fix"
+    "lint": "node_modules/.bin/eslint src/**/*.js *.js server/**/*.js",
+    "lint-fix": "node_modules/.bin/eslint src/**/*.js *.js server/**/*.js --fix"
   },
   "repository": {
     "type": "git",
