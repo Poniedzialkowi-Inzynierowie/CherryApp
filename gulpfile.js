@@ -109,7 +109,7 @@ gulp.task('scripts', () => {
 })
 
 gulp.task('server', () => {
-  exec(`nodemon ${config.server}`, (err, stdout, stderr) => {
+  exec(`node ${config.server}`, (err, stdout, stderr) => {
     if (err) throw err
     console.log(stdout)
     console.log(stderr)
