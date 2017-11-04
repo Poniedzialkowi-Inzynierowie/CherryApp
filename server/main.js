@@ -13,4 +13,9 @@ app.use(express.static('build'))
 // gzip returned files for better speed
 app.use(compression())
 
+app.get('/time', (req, res) => {
+  res.setHeader('Content-Type', 'application/json')
+  res.send(JSON.stringify({ time: '11:20' }))
+})
+
 app.listen(port)
