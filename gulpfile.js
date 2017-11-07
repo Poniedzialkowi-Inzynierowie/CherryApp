@@ -1,165 +1,92 @@
-// util
+const del = require('del')
 const gulp = require('gulp')
 const gutil = require('gulp-util')
-const sourcemaps = require('gulp-sourcemaps')
-const notify = require('gulp-notify')
-const del = require('del')
-const runSequence = require('run-sequence')
-// styles
-const sass = require('gulp-sass')
-const autoprefixer = require('gulp-autoprefixer')
-// scripts
-const browserify = require('browserify')
-const uglify = require('gulp-uglify')
-const source = require('vinyl-source-stream')
-const buffer = require('vinyl-buffer')
-const wbBuild = require('workbox-build')
-// server
-const exec = require('child_process').exec
-const browserSync = require('browser-sync')
-const reload = browserSync.reload
+const runSync = require('run-sequence')
+const notify = require('gulp-notify').onError
+const plugins = require('gulp-load-plugins')()
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load()
+}
+
+plugins.browserify = require('browserify')
+plugins.uglify = require('gulp-uglify')
+plugins.buffer = require('vinyl-buffer')
+plugins.source = require('vinyl-source-stream')
+
+plugins.sass = require('gulp-sass')
+plugins.autoprefix = require('gulp-autoprefixer')
+plugins.sourcemaps = require('gulp-sourcemaps')
+
+plugins.workbox = require('workbox-build')
+
+plugins.exec = require('child_process').exec
+
+plugins.browSync = require('browser-sync')
+plugins.reload = plugins.browSync.reload;
+
+plugins.sourcemapDevelopment = {
+  start:  () => process.env.stage == "Nightly" ? gutil.noop() : plugins.sourcemaps.init({loadMaps: true}),
+  end:    () => process.env.stage == "Nightly" ? gutil.noop() : plugins.sourcemaps.write()
+}
+
+plugins.handleError = (...args) => {
+  notify({
+    title: 'Compile Error',
+    message: '<%= error.message %>'
+    }).apply(this, args)
+}
+
+function getTask(task) { return require('./tasks/' + task)(gulp, plugins) }
 
 // TODO: setup unit testing for server and components
 // TODO: add external config where development localhost port is set
+// FIXME: 'scripts' and 'assets' tasks don't respect synchronouse execution
 
-const config = {
-  server: 'server/main.js',
-  // to run producton build use `gulp build --production`
-  production: !!gutil.env.production,
-  rootDir: 'src'
-}
+gulp.task('clear_build_folder', () => del('./build'))
+gulp.task('clear_ssl_files', () => del('./server/ca.key'))
 
-// Paths to source files
-const src = {
-  scriptsEntry: 'src/index.js',
-  htmlEntry: 'src/index.html',
-  scripts: [
-    'src/components/**/*.js',
-    'src/util/**/*.js'
-  ],
-  worker: 'src/service_worker.js',
-  styles: 'src/styles/**/*.scss',
-  assets: 'src/assets/**/*'
-}
+gulp.task('html', getTask('html'));
+gulp.task('assets', getTask('assets'));
+gulp.task('styles', getTask('styles'));
+gulp.task('scripts', getTask('scripts'));
+gulp.task('bundle_sw', getTask('sw_builder'));
 
-// Paths to built files destinations
-const dest = {
-  htmlEntry: 'build',
-  scripts: 'build',
-  styles: 'build',
-  assets: 'build/assets'
-}
+// gulp.task('gen_key', getTask('gen_central_auth_cert_key'));
+// gulp.task('gen_cert', getTask('gen_server_cert_key'));
+// gulp.task('validate_gened_ssl_files', getTask('test_ssl_files'));
+gulp.task('run_server', getTask('run_server'));
 
-gulp.task('default', ['build'], () => {
-  gulp.start(['server', 'watch', 'browser-sync'])
-})
-
-gulp.task('build', () => {
-  // sequence: clean build folder, run all build tasks in parallel, when done - generate service worker
-  runSequence('clean',
-    ['assets', 'scripts', 'styles', 'html'],
-    'bundle-sw'
-  )
-})
-
-gulp.task('clean', () => del('build'))
-
-gulp.task('assets', () => {
-  return gulp.src(src.assets)
-    .pipe(gulp.dest(dest.assets))
-    .pipe(reload({stream: true}))
-})
-
-gulp.task('html', () => {
-  return gulp.src(src.htmlEntry)
-    .pipe(gulp.dest(dest.htmlEntry))
-    .pipe(reload({stream: true}))
-})
-
-gulp.task('styles', () => {
-  return gulp.src(src.styles)
-    .pipe(startSourcemapIfNotProduction())
-    .pipe(sass({outputStyle: 'compressed'})
-      .on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['last 4 versions'],
-      cascade: true
-    }))
-    .pipe(endSourcemapIfNotProduction())
-    .pipe(gulp.dest(dest.styles))
-    .pipe(reload({stream: true}))
-})
-
-gulp.task('scripts', () => {
-  const b = browserify(src.scriptsEntry, {debug: true})
-    .transform('babelify', {sourceMaps: true})
-
-  return b.bundle()
-    .on('error', handleError)
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest(dest.scripts))
-    .pipe(buffer())
-    .pipe(startSourcemapIfNotProduction())
-    .on('error', handleError)
-    .pipe(uglify())
-    .on('error', handleError)
-    .pipe(endSourcemapIfNotProduction())
-    .pipe(gulp.dest(dest.scripts))
-    .pipe(reload({stream: true}))
-})
-
-gulp.task('server', () => {
-  exec(`node ${config.server}`, (err, stdout, stderr) => {
-    if (err) throw err
-    console.log(stdout)
-    console.log(stderr)
-  })
-})
+gulp.task('build', () => { runSync(
+  'clear_build_folder',         // removes directory with previous build
+  ['html', 'assets',             // copies '*.html' and 'assets/*' files to build_dir
+  'styles', 'scripts'],           // builds styles and scripts and puts them in build_dir
+  'bundle_sw'                   // generates service worker and puts it to build_dir
+)});
 
 gulp.task('watch', () => {
-  gulp.watch([src.scriptsEntry, ...src.scripts], ['scripts'])
-  gulp.watch(src.styles, ['styles'])
-  gulp.watch(src.assets, ['assets'])
-  gulp.watch(src.htmlEntry, ['html'])
-})
+  gulp.watch('./src/index.html', ['html']);
+  gulp.watch('./src/assets/**/*', ['assets']);
+  gulp.watch('./src/styles/**/*.scss', ['styles']);
+  gulp.watch(['./src/index.js', './src/components/**/*.js'], ['scripts']);
+});
+
+gulp.task('server', () => { runSync(
+//  'clear_ssl_files',            // removes previously generated certificate and key
+//  ['gen_key', 'gen_cert'],      // generates new key and certificate
+//  'validate_gened_ssl_files',   // runs auto test for generated ssl_files (env.build=nightly)
+  'run_server'                  // runs server after ssl-files have been generated
+)});
 
 gulp.task('browser-sync', () => {
-  browserSync({
+  plugins.browSync({
     proxy: 'localhost:8080',
-    port: '3001'
+    port: '3000'
   })
-})
+});
 
-const startSourcemapIfNotProduction = () => {
-  return config.production ? gutil.noop() : sourcemaps.init({loadMaps: true})
-}
+gulp.task('default', () => { runSync(
+  'build', 'watch',
+  'server', 'browser-sync'
+)});
 
-const endSourcemapIfNotProduction = () => {
-  return config.production ? gutil.noop() : sourcemaps.write()
-}
-
-const handleError = function (...args) {
-  notify.onError({
-    title: 'Compile Error',
-    message: '<%= error.message %>'
-  }).apply(this, args)
-  this.emit('end') // Keep gulp from hanging on this task
-}
-
-// gulp.task('bundle-sw', () => {});
-
-gulp.task('bundle-sw', () => {
-  return wbBuild.generateSW({
-    globDirectory: './build',
-    swDest: './build/sw.js',
-    globPatterns: ['**\/*.{html,js,css,json,ico}'], // eslint-disable-line no-useless-escape
-    globIgnores: ['admin.html']
-
-  })
-    .then(() => {
-      console.log('Service worker generated.')
-    })
-    .catch((err) => {
-      console.log('[ERROR] This happened: ' + err)
-    })
-})

@@ -1,0 +1,16 @@
+module.exports = (gulp, plugins) => {
+  return () => plugins.browserify('src/index.js', {debug: true})
+    .transform('babelify', {sourceMaps: true})
+    .bundle()
+    .on('error', plugins.handleError)
+    .pipe(plugins.source('bundle.js'))
+    .pipe(gulp.dest('./build'))
+    .pipe(plugins.buffer())
+    .pipe(plugins.sourcemapDevelopment.start())
+      .on('error', plugins.handleError)
+      .pipe(plugins.uglify())
+      .on('error', plugins.handleError)
+    .pipe(plugins.sourcemapDevelopment.end())
+    .pipe(gulp.dest('./build'))
+    .pipe(plugins.reload({stream: true}))
+}
