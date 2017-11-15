@@ -5,7 +5,7 @@ Aplikacja napisana dla Technikum Mechatronicznego nr 1 w Warszawie
 ## Gdzie ją znaleźć?
 
 Wersja oficjalna (branch master): https://http://cherryapp-master.herokuapp.com/  
-Wersja rozwijana (branch development): https://cherryapp-development.herokuapp.com/  
+Wersja rozwojowa (branch development): https://cherryapp-development.herokuapp.com/
 
 Istnieje również starsza, jednak w tym momencie nie rozwijana wersja aplikacji  
 Jest ona utrzymywana, jednak nie będą do niej dodawane nowe funkcjonalności  
