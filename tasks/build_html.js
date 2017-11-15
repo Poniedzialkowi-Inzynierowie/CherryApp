@@ -1,3 +1,3 @@
 module.exports = (gulp, plugins) =>
-  plugins.watcher('./src/index.html')
+  plugins.watcher('./index.html')
     .pipe(gulp.dest('./build'))

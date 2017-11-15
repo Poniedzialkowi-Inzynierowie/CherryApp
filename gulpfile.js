@@ -44,9 +44,10 @@ function assets () { return getTask('build_assets') }
 function styles () { return getTask('build_styles') }
 function scripts () { return getTask('build_scripts') }
 function bundleSw () { return getTask('generate_sw') }
+function vue () {return getTask('build_vue') }
 
 gulp.task('build', gulp.series(
-  clearBuildFolder, gulp.parallel(html, assets, styles, scripts)
+  clearBuildFolder, gulp.parallel(html, assets, styles, vue)
 ))
 
 gulp.task('server', () => process.env.NODE_ENV === 'production'
