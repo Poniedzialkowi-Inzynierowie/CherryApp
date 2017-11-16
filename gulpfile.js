@@ -26,4 +26,4 @@ gulp.task(build)
 // gulp.task(ssl)
 gulp.task(server)
 
-gulp.task('default', gulp.series('build','ssl', 'server'))
+gulp.task('default', gulp.series('build', /*'ssl',*/ 'server'))
