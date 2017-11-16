@@ -1,6 +1,0 @@
-{
-  "extends": ["standard", "standard-preact"],
-  "parserOptions": {
-    "ecmaVersion": 8
-  }
-}

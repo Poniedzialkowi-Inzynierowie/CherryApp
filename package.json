@@ -2,13 +2,42 @@
   "name": "cherryapp",
   "version": "0.1.0",
   "description": "Progressive web application made for Technikum Mechatroniczne nr 1 in Warsaw.",
-  "main": "server/main.js",
+  "main": "",
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "standard"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 8
+    },
+    "rules": {
+      "indent": [
+        "error",
+        "tab",
+        {
+          "VariableDeclarator": {
+            "var": 2,
+            "let": 2,
+            "const": 3
+          }
+        }
+      ],
+      "no-tabs": "off"
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build",
+    "postbuild": "gulp build --production",
     "start": "NODE_ENV=production node server/main.js",
-    "heroku-postbuild": "gulp build --production",
-    "lint": "node_modules/.bin/eslint src/**/*.js *.js server/**/*.js",
-    "lint-fix": "node_modules/.bin/eslint src/**/*.js *.js server/**/*.js --fix"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "node_modules/.bin/eslint src/**/*.js *.js tasks/*.js gulpfile.js",
+    "lint-fix": "node_modules/.bin/eslint src/**/*.js *.js tasks/*.js gulpfile.js --fix"
   },
   "repository": {
     "type": "git",
@@ -28,35 +57,23 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babelify": "^8.0.0",
-    "browser-sync": "^2.18.13",
-    "browserify": "^14.5.0",
-    "compression": "^1.7.1",
     "del": "^3.0.0",
-    "express": "^4.15.5",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-notify": "^3.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-nop": "0.0.3",
     "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.1",
+    "gulp-sw-cache": "^0.1.5",
     "gulp-uglify": "^3.0.0",
-    "gulp-util": "^3.0.8",
-    "helmet": "^3.9.0",
-    "preact": "^8.2.6",
-    "run-sequence": "^2.2.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "workbox-build": "^2.1.0"
+    "gulp-vueify2": "0.0.3",
+    "gulp-watch": "^4.3.11",
+    "gulp-webserver": "^0.9.1"
   },
   "devDependencies": {
     "eslint": "^4.10.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-config-standard-preact": "^1.1.6",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-standard": "^3.0.1"
-  }
+  },
+  "optionalDependencies": {}
 }
