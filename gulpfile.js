@@ -16,7 +16,7 @@ function server () {
 	this.description = 'Generate keys, and certificates so server can support ssl'
 	return getTask('ssl')
 }
-function server () {
+function ssl () {
 	this.displayName = 'Server'
 	this.description = 'Thanks to this function, depending on release stage, an adequate server is deployed'
 	return getTask('server')
@@ -26,4 +26,4 @@ gulp.task(build)
 // gulp.task(ssl)
 gulp.task(server)
 
-gulp.task('default', gulp.series('build', /*'ssl',*/ 'server'))
+gulp.task('default', gulp.series('build', /* 'ssl', */ 'server'))
