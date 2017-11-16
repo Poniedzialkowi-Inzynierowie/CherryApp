@@ -11,42 +11,29 @@
 </template>
 
 <script>
-
 export default {
-  data () {
-
-    return {
-      hours: '',
-      minutes: '',
-      seconds: '',
-      hourtime: ''
-    }
-  },
-  mounted () {
-    setInterval(this.updateDateTime, 1000)
-  },
-  methods: {
-
-
-        getHourTime (h) {
-    return h >= 12 ? 'PM' : 'AM'
-},
-
-        getZeroPad (n) {
-    return (parseInt(n, 10) >= 10 ? '' : '0') + n
-},
-
-    updateDateTime () {
-      let now = new Date()
-      this.hours = now.getHours()
-      this.minutes = getZeroPad(now.getMinutes())
-      this.seconds = getZeroPad(now.getSeconds())
-      this.hourtime = getHourTime(this.hours)
-      this.hours = this.hours % 12 || 12
-    }
-
-
-  }
+	data () {
+		return { hours: '00', minutes: '00', seconds: '00', hourtime: 'AM'}
+	},
+	mounted () {
+	    setInterval(this.updateDateTime, 1000)
+	},
+	methods: {
+		getHourTime (h) {
+    		return h < 12 ? 'AM' : 'PM'
+		},
+		getZeroPad (n) {
+			return (parseInt(n, 10) >= 10 ? '' : '0') + n
+		},
+		updateDateTime () {
+			let now = new Date()
+			this.hours = now.getHours()
+			this.minutes = getZeroPad(now.getMinutes())
+			this.seconds = getZeroPad(now.getSeconds())
+			this.hourtime = getHourTime(this.hours)
+			this.hours = this.hours % 12 || 12
+		}
+	}
 }
 </script>
 

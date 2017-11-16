@@ -5,33 +5,39 @@
   "main": "",
   "babel": {
     "presets": [
-      "react",
       "env"
-    ],
-    "plugins": [
-      [
-        "transform-react-jsx",
-        {
-          "pragma": "h"
-        }
-      ]
     ]
   },
   "eslintConfig": {
     "extends": [
-      "standard",
-      "standard-preact"
+      "eslint:recommended",
+      "standard"
     ],
     "parserOptions": {
       "ecmaVersion": 8
+    },
+    "rules": {
+      "indent": [
+        "error",
+        "tab",
+        {
+          "VariableDeclarator": {
+            "var": 2,
+            "let": 2,
+            "const": 3
+          }
+        }
+      ],
+      "no-tabs": "off"
     }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build",
+    "postbuild": "gulp build --production",
     "start": "NODE_ENV=production node server/main.js",
-    "heroku-postbuild": "gulp build --production",
-    "lint": "node_modules/.bin/eslint src/**/*.js *.js server/**/*.js",
-    "lint-fix": "node_modules/.bin/eslint src/**/*.js *.js server/**/*.js --fix"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "node_modules/.bin/eslint src/**/*.js *.js tasks/*.js gulpfile.js",
+    "lint-fix": "node_modules/.bin/eslint src/**/*.js *.js tasks/*.js gulpfile.js --fix"
   },
   "repository": {
     "type": "git",
@@ -51,35 +57,25 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babelify": "^8.0.0",
     "del": "^3.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-browserify": "^0.5.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-nop": "0.0.3",
     "gulp-notify": "^3.0.0",
-    "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
+    "gulp-sw-cache": "^0.1.5",
     "gulp-uglify": "^3.0.0",
-    "gulp-vueify": "0.0.3",
+    "gulp-vueify2": "0.0.3",
     "gulp-watch": "^4.3.11",
-    "gulp-webserver": "^0.9.1",
-    "preact": "^8.2.6",
-    "vue-cli": "^2.9.1",
-    "vuejs": "^2.0.6",
-    "workbox-build": "^2.1.0"
+    "gulp-webserver": "^0.9.1"
   },
   "devDependencies": {
     "eslint": "^4.10.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-config-standard-preact": "^1.1.6",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-standard": "^3.0.1"
   },
   "optionalDependencies": {}
